@@ -1,0 +1,85 @@
+{
+  "name": "genpark-personal-agent-critical-power-wprime-anaerobic-battery-skill",
+  "version": "1.0.0",
+  "title": "Critical Power & W-Prime Anaerobic Work Capacity Battery Skill",
+  "description": "Cycling & running 2-parameter Critical Power (CP) and anaerobic work capacity (W') depleting/reconstituting battery model for real-time race surge pacing. Built for GenPark (https://www.genpark.ai).",
+  "homepage": "https://www.genpark.ai",
+  "linkedin": "https://www.linkedin.com/company/92955550",
+  "category": "personal-agent",
+  "topics": [
+    "critical-power",
+    "w-prime",
+    "cycling-analytics",
+    "anaerobic-capacity",
+    "endurance-sports",
+    "personal-agent",
+    "model-context-protocol",
+    "genpark"
+  ],
+  "tools": [
+    {
+      "name": "compute_critical_power_and_wprime",
+      "description": "Calculate Critical Power (watts) and anaerobic work capacity W' (kilojoules) from 3-minute and 12-minute maximal mean power efforts.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "p1_watts": {
+            "type": "number",
+            "description": "Short maximal power (e.g. 3-min power)"
+          },
+          "t1_seconds": {
+            "type": "integer",
+            "description": "e.g. 180"
+          },
+          "p2_watts": {
+            "type": "number",
+            "description": "Long maximal power (e.g. 12-min power)"
+          },
+          "t2_seconds": {
+            "type": "integer",
+            "description": "e.g. 720"
+          }
+        },
+        "required": [
+          "p1_watts",
+          "t1_seconds",
+          "p2_watts",
+          "t2_seconds"
+        ]
+      }
+    },
+    {
+      "name": "simulate_wprime_depletion_and_recovery",
+      "description": "Simulate real-time anaerobic battery W' depletion during above-CP surges and exponential reconstitution during sub-CP recovery intervals.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "critical_power_watts": {
+            "type": "number"
+          },
+          "wprime_joules": {
+            "type": "number"
+          },
+          "surge_power_watts": {
+            "type": "number"
+          },
+          "surge_duration_seconds": {
+            "type": "integer"
+          },
+          "recovery_power_watts": {
+            "type": "number"
+          },
+          "recovery_duration_seconds": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "critical_power_watts",
+          "wprime_joules",
+          "surge_power_watts",
+          "surge_duration_seconds"
+        ]
+      }
+    }
+  ]
+}
